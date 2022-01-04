@@ -1,3 +1,4 @@
+import 'package:bmi_calculator_bloc/logic/age/age_cubit.dart';
 import 'package:bmi_calculator_bloc/screens/result_page.dart';
 import 'package:bmi_calculator_bloc/utilitis/bottom_button.dart';
 import 'package:bmi_calculator_bloc/utilitis/calculate_result.dart';
@@ -6,17 +7,18 @@ import 'package:bmi_calculator_bloc/utilitis/icon_content.dart';
 import 'package:bmi_calculator_bloc/utilitis/reusable_card.dart';
 import 'package:bmi_calculator_bloc/utilitis/round_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({ Key? key }) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-   Gender selectGender = Gender.male;
+  Gender selectGender = Gender.male;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -160,45 +162,41 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   color: activeCardColor,
                 )),
-                Expanded(
-                    child: ReusableCard(
-                  cardChild: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "AGE",
-                        style: textLabel,
-                      ),
-                      Text(
-                        "$age",
-                        style: numberLabel,
-                      ),
-                      Row(
+                BlocBuilder<AgeCubit, AgeState>(
+                  builder: (context, state) {
+                    return Expanded(
+                        child: ReusableCard(
+                      cardChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          RoundButton(
-                              onPressed: () {
-                                setState(() {
-                                  age--;
-                                });
-                              },
-                              icon: FontAwesomeIcons.minus),
-                          const SizedBox(
-                            width: 10.0,
+                          const Text(
+                            "AGE",
+                            style: textLabel,
                           ),
-                          RoundButton(
-                              onPressed: () {
-                                setState(() {
-                                  age++;
-                                });
-                              },
-                              icon: FontAwesomeIcons.plus)
+                          Text(
+                            "${state.age}",
+                            style: numberLabel,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RoundButton(
+                                  onPressed: () =>context.read<AgeCubit>().ageDecrement(),
+                                  icon: FontAwesomeIcons.minus),
+                              const SizedBox(
+                                width: 10.0,
+                              ),
+                              RoundButton(
+                                  onPressed: ()=>context.read<AgeCubit>().ageIncrement(),
+                                  icon: FontAwesomeIcons.plus)
+                            ],
+                          ),
                         ],
                       ),
-                    ],
-                  ),
-                  color: activeCardColor,
-                )),
+                      color: activeCardColor,
+                    ));
+                  },
+                ),
               ],
             ),
           ),
