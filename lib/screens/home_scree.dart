@@ -1,3 +1,4 @@
+import 'package:bmi_calculator_bloc/logic/weight/weight_cubit.dart';
 import 'package:bmi_calculator_bloc/logic/age/age_cubit.dart';
 import 'package:bmi_calculator_bloc/screens/result_page.dart';
 import 'package:bmi_calculator_bloc/utilitis/bottom_button.dart';
@@ -122,46 +123,46 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: Row(
               children: [
-                Expanded(
-                    child: ReusableCard(
-                  cardChild: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "WEIGHT",
-                        style: textLabel,
-                      ),
-                      Text(
-                        "$weight",
-                        style: numberLabel,
-                      ),
-                      Row(
+                BlocBuilder<WeightCubit, WeightState>(
+                  builder: (context, state) {
+                    return Expanded(
+                        child: ReusableCard(
+                      cardChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          RoundButton(
-                            icon: FontAwesomeIcons.minus,
-                            onPressed: () {
-                              setState(() {
-                                weight--;
-                              });
-                            },
+                          const Text(
+                            "WEIGHT",
+                            style: textLabel,
                           ),
-                          const SizedBox(
-                            width: 10.0,
+                          Text(
+                            "${state.weight}",
+                            style: numberLabel,
                           ),
-                          RoundButton(
-                              onPressed: () {
-                                setState(() {
-                                  weight++;
-                                });
-                              },
-                              icon: FontAwesomeIcons.plus)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RoundButton(
+                                icon: FontAwesomeIcons.minus,
+                                onPressed: () => context
+                                    .read<WeightCubit>()
+                                    .weightDecrement(),
+                              ),
+                              const SizedBox(
+                                width: 10.0,
+                              ),
+                              RoundButton(
+                                  onPressed: () => context
+                                      .read<WeightCubit>()
+                                      .weightIncrement(),
+                                  icon: FontAwesomeIcons.plus)
+                            ],
+                          )
                         ],
-                      )
-                    ],
-                  ),
-                  color: activeCardColor,
-                )),
+                      ),
+                      color: activeCardColor,
+                    ));
+                  },
+                ),
                 BlocBuilder<AgeCubit, AgeState>(
                   builder: (context, state) {
                     return Expanded(
@@ -181,13 +182,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               RoundButton(
-                                  onPressed: () =>context.read<AgeCubit>().ageDecrement(),
+                                  onPressed: () =>
+                                      context.read<AgeCubit>().ageDecrement(),
                                   icon: FontAwesomeIcons.minus),
                               const SizedBox(
                                 width: 10.0,
                               ),
                               RoundButton(
-                                  onPressed: ()=>context.read<AgeCubit>().ageIncrement(),
+                                  onPressed: () =>
+                                      context.read<AgeCubit>().ageIncrement(),
                                   icon: FontAwesomeIcons.plus)
                             ],
                           ),
