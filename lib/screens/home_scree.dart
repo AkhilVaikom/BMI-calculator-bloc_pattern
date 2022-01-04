@@ -1,3 +1,4 @@
+import 'package:bmi_calculator_bloc/logic/weight/weight_cubit.dart';
 import 'package:bmi_calculator_bloc/screens/result_page.dart';
 import 'package:bmi_calculator_bloc/utilitis/bottom_button.dart';
 import 'package:bmi_calculator_bloc/utilitis/calculate_result.dart';
@@ -6,17 +7,18 @@ import 'package:bmi_calculator_bloc/utilitis/icon_content.dart';
 import 'package:bmi_calculator_bloc/utilitis/reusable_card.dart';
 import 'package:bmi_calculator_bloc/utilitis/round_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({ Key? key }) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-   Gender selectGender = Gender.male;
+  Gender selectGender = Gender.male;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,46 +122,42 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: Row(
               children: [
-                Expanded(
-                    child: ReusableCard(
-                  cardChild: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "WEIGHT",
-                        style: textLabel,
-                      ),
-                      Text(
-                        "$weight",
-                        style: numberLabel,
-                      ),
-                      Row(
+                BlocBuilder<WeightCubit, WeightState>(
+                  builder: (context, state) {
+                    return Expanded(
+                        child: ReusableCard(
+                      cardChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          RoundButton(
-                            icon: FontAwesomeIcons.minus,
-                            onPressed: () {
-                              setState(() {
-                                weight--;
-                              });
-                            },
+                          const Text(
+                            "WEIGHT",
+                            style: textLabel,
                           ),
-                          const SizedBox(
-                            width: 10.0,
+                          Text(
+                            "${state.weight}",
+                            style: numberLabel,
                           ),
-                          RoundButton(
-                              onPressed: () {
-                                setState(() {
-                                  weight++;
-                                });
-                              },
-                              icon: FontAwesomeIcons.plus)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RoundButton(
+                                icon: FontAwesomeIcons.minus,
+                                onPressed: ()=>context.read<WeightCubit>().weightDecrement(),
+                              ),
+                              const SizedBox(
+                                width: 10.0,
+                              ),
+                              RoundButton(
+                                  onPressed: ()=>context.read<WeightCubit>().weightIncrement(),
+                                  icon: FontAwesomeIcons.plus)
+                            ],
+                          )
                         ],
-                      )
-                    ],
-                  ),
-                  color: activeCardColor,
-                )),
+                      ),
+                      color: activeCardColor,
+                    ));
+                  },
+                ),
                 Expanded(
                     child: ReusableCard(
                   cardChild: Column(

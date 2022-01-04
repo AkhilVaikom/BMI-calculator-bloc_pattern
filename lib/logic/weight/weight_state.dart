@@ -8,5 +8,5 @@ class WeightState {
 }
 
 class WeightInitial extends WeightState {
-  WeightInitial() : super(weight: 50);
+  WeightInitial() : super(weight: 60);
 }
