@@ -1,4 +1,5 @@
 import 'package:bmi_calculator_bloc/logic/weight/weight_cubit.dart';
+import 'package:bmi_calculator_bloc/logic/age/age_cubit.dart';
 import 'package:bmi_calculator_bloc/screens/result_page.dart';
 import 'package:bmi_calculator_bloc/utilitis/bottom_button.dart';
 import 'package:bmi_calculator_bloc/utilitis/calculate_result.dart';
@@ -142,13 +143,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               RoundButton(
                                 icon: FontAwesomeIcons.minus,
-                                onPressed: ()=>context.read<WeightCubit>().weightDecrement(),
+                                onPressed: () => context
+                                    .read<WeightCubit>()
+                                    .weightDecrement(),
                               ),
                               const SizedBox(
                                 width: 10.0,
                               ),
                               RoundButton(
-                                  onPressed: ()=>context.read<WeightCubit>().weightIncrement(),
+                                  onPressed: () => context
+                                      .read<WeightCubit>()
+                                      .weightIncrement(),
                                   icon: FontAwesomeIcons.plus)
                             ],
                           )
@@ -158,45 +163,43 @@ class _HomeScreenState extends State<HomeScreen> {
                     ));
                   },
                 ),
-                Expanded(
-                    child: ReusableCard(
-                  cardChild: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "AGE",
-                        style: textLabel,
-                      ),
-                      Text(
-                        "$age",
-                        style: numberLabel,
-                      ),
-                      Row(
+                BlocBuilder<AgeCubit, AgeState>(
+                  builder: (context, state) {
+                    return Expanded(
+                        child: ReusableCard(
+                      cardChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          RoundButton(
-                              onPressed: () {
-                                setState(() {
-                                  age--;
-                                });
-                              },
-                              icon: FontAwesomeIcons.minus),
-                          const SizedBox(
-                            width: 10.0,
+                          const Text(
+                            "AGE",
+                            style: textLabel,
                           ),
-                          RoundButton(
-                              onPressed: () {
-                                setState(() {
-                                  age++;
-                                });
-                              },
-                              icon: FontAwesomeIcons.plus)
+                          Text(
+                            "${state.age}",
+                            style: numberLabel,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RoundButton(
+                                  onPressed: () =>
+                                      context.read<AgeCubit>().ageDecrement(),
+                                  icon: FontAwesomeIcons.minus),
+                              const SizedBox(
+                                width: 10.0,
+                              ),
+                              RoundButton(
+                                  onPressed: () =>
+                                      context.read<AgeCubit>().ageIncrement(),
+                                  icon: FontAwesomeIcons.plus)
+                            ],
+                          ),
                         ],
                       ),
-                    ],
-                  ),
-                  color: activeCardColor,
-                )),
+                      color: activeCardColor,
+                    ));
+                  },
+                ),
               ],
             ),
           ),
