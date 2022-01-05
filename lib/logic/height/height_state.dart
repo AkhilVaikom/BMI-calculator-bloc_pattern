@@ -8,5 +8,6 @@ class HeightState {
 }
 
 class HeightInitial extends HeightState {
-  HeightInitial() : super(height: 150);
+  HeightInitial() : super(height: 160);
+  
 }
