@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
             buttonText: "CALCULATE",
             onTap: () {
               CalculateResult calc =
-                  CalculateResult(height: height, weight: weight);
+                  CalculateResult(height: height!, weight: weight!);
               Navigator.push(
                 context,
                 MaterialPageRoute(

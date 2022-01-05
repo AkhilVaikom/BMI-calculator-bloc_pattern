@@ -1,4 +1,5 @@
 import 'package:bmi_calculator_bloc/constants/colors_constants.dart';
+import 'package:bmi_calculator_bloc/constants/string_constants.dart';
 import 'package:bmi_calculator_bloc/constants/style_constants.dart';
 import 'package:bmi_calculator_bloc/logic/weight/weight_cubit.dart';
 import 'package:bmi_calculator_bloc/screens/home/widgets/round_button.dart';
@@ -16,6 +17,7 @@ class WeightWidgets extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<WeightCubit, WeightState>(
       builder: (context, state) {
+         weight=state.weight;
         return Expanded(
             child: ReusableCard(
           cardChild: Column(
@@ -34,16 +36,21 @@ class WeightWidgets extends StatelessWidget {
                 children: [
                   RoundButton(
                     icon: FontAwesomeIcons.minus,
-                    onPressed: () =>
-                        context.read<WeightCubit>().weightDecrement(),
+                    onPressed: () {
+                      context.read<WeightCubit>().weightDecrement();
+                     
+                    },
                   ),
                   const SizedBox(
                     width: 10.0,
                   ),
                   RoundButton(
-                      onPressed: () =>
-                          context.read<WeightCubit>().weightIncrement(),
-                      icon: FontAwesomeIcons.plus)
+                    icon: FontAwesomeIcons.plus,
+                    onPressed: () {
+                      context.read<WeightCubit>().weightIncrement();
+                     
+                    },
+                  ),
                 ],
               )
             ],

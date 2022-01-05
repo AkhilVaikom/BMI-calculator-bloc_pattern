@@ -27,6 +27,7 @@ class ResultPage extends StatelessWidget {
     return Scaffold(
       //backgroundColor: inactiveCardColor,
       appBar: AppBar(
+        backgroundColor: const Color(0xff0b0f31),
         title: const Text("BMI CALCULATOR"),
       ),
       body: Column(

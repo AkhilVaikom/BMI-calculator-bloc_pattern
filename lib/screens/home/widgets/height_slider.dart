@@ -1,4 +1,5 @@
 import 'package:bmi_calculator_bloc/constants/colors_constants.dart';
+import 'package:bmi_calculator_bloc/constants/string_constants.dart';
 import 'package:bmi_calculator_bloc/constants/style_constants.dart';
 import 'package:bmi_calculator_bloc/logic/height/height_cubit.dart';
 import 'package:bmi_calculator_bloc/screens/widgets/reusable_card.dart';
@@ -12,8 +13,10 @@ class HeightSliderWidgets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return BlocBuilder<HeightCubit, HeightState>(
       builder: (context, state) {
+        height=state.height;
         return Expanded(
             child: ReusableCard(
           cardChild: Column(
@@ -54,7 +57,7 @@ class HeightSliderWidgets extends StatelessWidget {
                   inactiveColor: inactiveColor,
                   onChanged: (double newValue) {
                     context.read<HeightCubit>().updateVal(newValue);
-                    
+                   
                   },
                 ),
               ),
