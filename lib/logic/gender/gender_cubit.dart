@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:bmi_calculator_bloc/utilitis/constants.dart';
-import 'package:meta/meta.dart';
+import 'package:bmi_calculator_bloc/constants/enum_constants.dart';
 
 part 'gender_state.dart';
 

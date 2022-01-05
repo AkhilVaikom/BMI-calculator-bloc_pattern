@@ -1,10 +1,10 @@
 //import 'package:bmi_calculator/input_page.dart';
 
+import 'package:bmi_calculator_bloc/constants/colors_constants.dart';
+import 'package:bmi_calculator_bloc/constants/style_constants.dart';
+import 'package:bmi_calculator_bloc/screens/widgets/bottom_button.dart';
+import 'package:bmi_calculator_bloc/screens/widgets/reusable_card.dart';
 import 'package:flutter/material.dart';
-
-import 'package:bmi_calculator_bloc/utilitis/bottom_button.dart';
-import 'package:bmi_calculator_bloc/utilitis/constants.dart';
-import 'package:bmi_calculator_bloc/utilitis/reusable_card.dart';
 
 class ResultPage extends StatelessWidget {
   const ResultPage({
