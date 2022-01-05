@@ -1,6 +1,7 @@
 import 'package:bmi_calculator_bloc/logic/weight/weight_cubit.dart';
 import 'package:bmi_calculator_bloc/logic/age/age_cubit.dart';
 import 'package:bmi_calculator_bloc/logic/height/height_cubit.dart';
+import 'package:bmi_calculator_bloc/screens/home/widgets/home_appbar.dart';
 import 'package:bmi_calculator_bloc/screens/result_page.dart';
 import 'package:bmi_calculator_bloc/utilitis/bottom_button.dart';
 import 'package:bmi_calculator_bloc/utilitis/calculate_result.dart';
@@ -24,9 +25,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xff0b0f31),
-        title: const Text('BMI CALCULATOR'),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(50),
+        child: HomeAppBarWidgets(),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -112,7 +113,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         min: 100.0,
                         max: 250.0,
                         inactiveColor: inactiveColor,
-                        onChanged: (newValue)=>context.read<HeightCubit>().updateVal(newValue),
+                        onChanged: (newValue) =>
+                            context.read<HeightCubit>().updateVal(newValue),
                       ),
                     ),
                   ],
