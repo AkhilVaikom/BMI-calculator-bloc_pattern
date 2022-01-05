@@ -1,20 +1,21 @@
+
 import 'package:bmi_calculator_bloc/constants/colors_constants.dart';
 import 'package:bmi_calculator_bloc/constants/style_constants.dart';
-import 'package:bmi_calculator_bloc/logic/weight/weight_cubit.dart';
+import 'package:bmi_calculator_bloc/logic/age/age_cubit.dart';
+import 'package:bmi_calculator_bloc/screens/home/widgets/round_button.dart';
 import 'package:bmi_calculator_bloc/screens/widgets/reusable_card.dart';
-import 'package:bmi_calculator_bloc/screens/widgets/round_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class WeightWidgets extends StatelessWidget {
-  const WeightWidgets({
+class AgeWidgets extends StatelessWidget {
+  const AgeWidgets({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WeightCubit, WeightState>(
+    return BlocBuilder<AgeCubit, AgeState>(
       builder: (context, state) {
         return Expanded(
             child: ReusableCard(
@@ -22,30 +23,29 @@ class WeightWidgets extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                "WEIGHT",
+                "AGE",
                 style: textLabel,
               ),
               Text(
-                "${state.weight}",
+                "${state.age}",
                 style: numberLabel,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   RoundButton(
-                    icon: FontAwesomeIcons.minus,
-                    onPressed: () =>
-                        context.read<WeightCubit>().weightDecrement(),
-                  ),
+                      onPressed: () =>
+                          context.read<AgeCubit>().ageDecrement(),
+                      icon: FontAwesomeIcons.minus),
                   const SizedBox(
                     width: 10.0,
                   ),
                   RoundButton(
                       onPressed: () =>
-                          context.read<WeightCubit>().weightIncrement(),
+                          context.read<AgeCubit>().ageIncrement(),
                       icon: FontAwesomeIcons.plus)
                 ],
-              )
+              ),
             ],
           ),
           color: activeCardColor,
