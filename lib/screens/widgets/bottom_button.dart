@@ -1,7 +1,8 @@
 
+import 'package:bmi_calculator_bloc/constants/colors_constants.dart';
+import 'package:bmi_calculator_bloc/constants/string_constants.dart';
 import 'package:flutter/material.dart';
 
-import 'package:bmi_calculator_bloc/utilitis/constants.dart';
 
 class BottomButton extends StatelessWidget {
   const BottomButton({

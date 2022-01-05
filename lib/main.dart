@@ -2,7 +2,7 @@ import 'package:bmi_calculator_bloc/logic/age/age_cubit.dart';
 import 'package:bmi_calculator_bloc/logic/gender/gender_cubit.dart';
 import 'package:bmi_calculator_bloc/logic/height/height_cubit.dart';
 import 'package:bmi_calculator_bloc/logic/weight/weight_cubit.dart';
-import 'package:bmi_calculator_bloc/screens/home_scree.dart';
+import 'package:bmi_calculator_bloc/screens/home/home_scree.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
